@@ -5,3 +5,4 @@
     <li> <%= link_to "#{page.title}", pages_show_path(page.title) %> </li>
   <% end %>
 </ul>
+<%= link_to 'Events', events_index_path(format: :json) %>
