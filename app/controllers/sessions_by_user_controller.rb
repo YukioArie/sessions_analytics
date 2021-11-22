@@ -1,10 +1,13 @@
 class SessionsByUserController < ApplicationController
+  before_action :get_session_users
+
   def index
-    def index
-      @sessions_by_user = SessionsByUser.all
-      respond_to do |format|
-        format.json { render json: @sessions_by_user }
-      end
-    end
+    console
+  end
+
+  private
+
+  def get_session_users
+    @sessions_by_user = SessionsByUser.all.order(:user_id)
   end
 end
