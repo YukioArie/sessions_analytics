@@ -1,9 +1,11 @@
 class ApplicationController < ActionController::Base
-  before_action :set_cookies_and_user
-  def set_cookies_and_user
+  before_action :set_cookies_user_session
+  def set_cookies_user_session
     unless cookies[:visitorId]
       cookies[:visitorId] = SecureRandom.uuid
-      User.create!(visitorId: cookies[:visitorId])
+      user = User.new(visitorId: cookies[:visitorId])
+      user.save!
+      SessionsByUser.create!(user_id: user.id)
     end
   end
 end
