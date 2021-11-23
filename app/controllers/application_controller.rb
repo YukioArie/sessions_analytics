@@ -15,9 +15,21 @@ class ApplicationController < ActionController::Base
 
   def verify_quantity_events_by_sessions
     if quantity_events_by_user > 1
-      new_duration = Time.now - Time.at(get_last_session.events.last.timestamp)
-      get_last_session.update(duration: new_duration)
+      update_duration_by_session
     end
+  end
+
+  def new_duration
+    Time.now - Time.at(get_last_events_timestamp)
+  end
+
+  def get_last_events_timestamp
+    get_last_session.events.last.timestamp
+  end
+  
+
+  def update_duration_by_session
+    get_last_session.update(duration: new_duration)
   end
 
   def verify_duration_session
