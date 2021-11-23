@@ -8,6 +8,6 @@ class SessionsByUserController < ApplicationController
   private
 
   def get_session_users
-    @sessions_by_user = SessionsByUser.all.order(:user_id)
+    @sessions_by_user = SessionsByUser.includes(:events, :user).order(:user_id)
   end
 end

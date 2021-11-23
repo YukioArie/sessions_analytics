@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all.rotate
+    @events = Event.includes(:user).rotate
   end
 end
